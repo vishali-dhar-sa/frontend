@@ -12,6 +12,9 @@ import {SocialLoginModule,
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header/header.component';
+import { NewpostComponent } from './home/newpost/newpost.component';
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -34,7 +37,10 @@ export function getAuthServiceConfigs() {
 
 const appRoutes:Routes=[
   {path:'api/signup', component:SignupComponent},
-  {path:'api/login',component:LoginComponent}
+  {path:'api/login',component:LoginComponent},
+  {path:'home',component:HomeComponent},
+  {path:'',redirectTo:'/home',pathMatch:'full'},
+  {path:'newpost',component:NewpostComponent}
 ]
 
 @NgModule({
@@ -42,6 +48,9 @@ const appRoutes:Routes=[
     AppComponent,
     SignupComponent,
     LoginComponent,
+    HomeComponent,
+    HeaderComponent,
+    NewpostComponent,
    
     
   

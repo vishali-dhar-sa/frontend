@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
     this.authservice.signIn(socialPlatformProvider).then(
       (userData) => {
         console.log(socialPlatform + " sign in data : ", userData);
-        
+          
       }
     );
   }

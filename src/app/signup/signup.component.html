@@ -13,7 +13,7 @@
                         id="email" 
                         formControlName="email" 
                         placeholder="Enter email" 
-                        required>
+                        >
                       </div>
                     </div>
                     <div class="form-group">
@@ -24,7 +24,7 @@
                         id="pwd" 
                         formControlName="password" 
                         placeholder="Enter password" 
-                        required>
+                        >
                       </div>
                     </div>
                     <!-- <div class="form-group"> 
@@ -36,7 +36,7 @@
                     </div> -->
                     <div class="form-group"> 
                       <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary" >Sign Up</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="!signupForm.valid">Sign Up</button>
                       </div>
                     </div>
                     <button class="loginBtn loginBtn--facebook">

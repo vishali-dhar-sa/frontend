@@ -13,16 +13,21 @@ export class UserService {
 
   constructor(private http:HttpClient) { }
 
-  Signup(user:User){
- this.http.post("http://localhost:8880/api/signup",user).subscribe((message)=>{
-  console.log(message)
+Signup(user:User){
+ this.http.post("http://localhost:8880/api/signup",user).subscribe(
+   (message)=>{
+   console.log(message),
+   (err)=>{
+     console.log(err)
+   }
+
 });
 }
  Login (user:User){
   this.http.post("http://localhost:8880/api/login",user).subscribe((message)=>{
    console.log(message)
  });
-   }
-
+}
+  
 
 }

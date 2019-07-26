@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl} from '@angular/forms';
+import { FormGroup,FormControl, Validators} from '@angular/forms';
+import { PostcreateService } from './postcreate.service';
 
 @Component({
   selector: 'app-newpost',
@@ -8,30 +9,25 @@ import { FormGroup,FormControl} from '@angular/forms';
 })
 export class NewpostComponent implements OnInit {
   addPost:FormGroup
-  constructor() { }
+  url:[]
+  constructor(private postcreate:PostcreateService) { }
 
   ngOnInit() {
      this.addPost=new FormGroup({
-      'title':new FormControl(''),
+      'title':new FormControl('',Validators.required),
       'description':new FormControl(''),
       'file':new FormControl('')
      
     })
   }
+
+  
   
   onSubmit(){
-    if(!this.addPost.valid){
-      return ;
 
-    }else{
-      
-       const title= this.addPost.value['title']
-       const description= this.addPost.value['description']
-       const file=this.addPost.value['file']
-        console.log({title,description,file})
-
+    this.addPost.value.file = this.addPost.value.file.replace("C:\\fakepath\\", "");
+    console.log(this.addPost.value.file);
+        this.postcreate.CreatePost(this.addPost.value);
       }
-      
-    }
 
 }

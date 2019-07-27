@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-interface Post{
-  title:String;
-  description:String;
-  file:String
+interface Post {
+  title: String;
+  description: String;
+  file: String
 
 }
 
@@ -13,13 +13,16 @@ interface Post{
 })
 export class PostcreateService {
 
-  constructor(private http:HttpClient) { }
-    
-  CreatePost(post:Post){
-    console.log(post);
-    this.http.post("http://localhost:8880/api/upload", post).subscribe(res =>{
-       console.log(res);
-    })
-}
+  constructor(private http: HttpClient) { }
 
+  CreatePost(post: Post) {
+    console.log(post);
+    this.http.post("http://localhost:8880/api/upload", post)
+      .subscribe(
+        res => {
+          console.log(res)
+        }, err => {
+          console.log(err)
+        }
+      )}
 }

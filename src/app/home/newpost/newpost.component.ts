@@ -10,7 +10,7 @@ import { PostcreateService } from './postcreate.service';
 export class NewpostComponent implements OnInit {
   addPost:FormGroup
   url:[]
-  constructor(private postcreate:PostcreateService) { }
+  constructor(private postCreateService:PostcreateService) { }
 
   ngOnInit() {
      this.addPost=new FormGroup({
@@ -27,7 +27,7 @@ export class NewpostComponent implements OnInit {
 
     this.addPost.value.file = this.addPost.value.file.replace("C:\\fakepath\\", "");
     console.log(this.addPost.value.file);
-        this.postcreate.CreatePost(this.addPost.value);
+        this.postCreateService.CreatePost(this.addPost.value);
       }
 
 }

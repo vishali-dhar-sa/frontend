@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule,HTTP_INTERCEPTORS} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {RouterModule,Routes} from '@angular/router';
 import {SocialLoginModule,
@@ -15,6 +15,8 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { NewpostComponent } from './home/newpost/newpost.component';
+import { AuthGuard } from './auth.guard';
+import {TokenInterceptorService} from './token-interceptor.service'
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -36,10 +38,10 @@ export function getAuthServiceConfigs() {
 
 
 const appRoutes:Routes=[
+  {path:'',redirectTo:'/home',pathMatch:'full'},
+  {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
   {path:'api/signup', component:SignupComponent},
   {path:'api/login',component:LoginComponent},
-  {path:'home',component:HomeComponent},
-  {path:'',redirectTo:'/home',pathMatch:'full'},
   {path:'newpost',component:NewpostComponent}
 ]
 
@@ -51,6 +53,7 @@ const appRoutes:Routes=[
     HomeComponent,
     HeaderComponent,
     NewpostComponent,
+    
    
     
   
@@ -63,10 +66,17 @@ const appRoutes:Routes=[
     SocialLoginModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [{
-               provide: AuthServiceConfig,
-               useFactory: getAuthServiceConfigs
-              }],
+  providers: [AuthGuard,
+             {
+              provide: AuthServiceConfig,                     
+              useFactory: getAuthServiceConfigs,
+             },
+             {
+               provide:HTTP_INTERCEPTORS,
+               useClass:TokenInterceptorService,
+               multi:true
+             },
+            ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

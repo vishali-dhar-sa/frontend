@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Post</a>
+    <a class="navbar-brand" >Post</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -7,16 +7,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/api/login" routerLinkActive="active">Login</a>
+          <a class="nav-link" *ngIf="!userService.loggedIn()" routerLink="/api/login" routerLinkActive="active">Login</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" routerLink="/api/signup" routerLinkActive="active">Signup</a>
+            <a class="nav-link" *ngIf="!userService.loggedIn()" routerLink="/api/signup" routerLinkActive="active">Signup</a>
           </li>
         <li class="nav-item my-2 my-lg-0">
-          <a class="nav-link disabled" href="#">Logout</a>
+          <a class="nav-link" style="cursor:pointer" *ngIf="userService.loggedIn()" (click)="userService.logoutUser()">Logout</a>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">

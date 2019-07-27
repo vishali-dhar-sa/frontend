@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 interface User{
   email:String;
@@ -11,23 +12,26 @@ interface User{
 })
 export class UserService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient,
+              private router:Router) { }
 
 Signup(user:User){
- this.http.post("http://localhost:8880/api/signup",user).subscribe(
-   (message)=>{
-   console.log(message),
-   (err)=>{
-     console.log(err)
-   }
-
-});
-}
- Login (user:User){
-  this.http.post("http://localhost:8880/api/login",user).subscribe((message)=>{
-   console.log(message)
- });
+ return this.http.post<{token:string}>("http://localhost:8880/api/signup",user)
 }
   
-
+ Login (user:User){
+  return this.http.post<{token:string}>("http://localhost:8880/api/login",user)
 }
+
+loggedIn(){
+  return !!localStorage.getItem('token')
+}
+
+logoutUser(){
+  localStorage.removeItem('token')
+  this.router.navigate(['/api/login'])
+}
+getToken(){
+  return localStorage.getItem('token')
+}
+} 

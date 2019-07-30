@@ -27,7 +27,7 @@
           <div class="caption">
             <h4>{{post.file}}</h4>
           </div>
-          <a class="btn btn-primary" [routerLink]="['/postDetail', post.id]" routerLinkActive="active">More Info</a>
+          <a class="btn btn-primary" (click)="getById(post._id)">More Info</a>
         </div>
         </a>
       </div>

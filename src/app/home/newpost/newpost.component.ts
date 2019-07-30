@@ -30,8 +30,20 @@ export class NewpostComponent implements OnInit {
       this.selectedFile = file;
     }
   }
-
   onSubmit() {
+
+    // const title = this.addPost.value['title']
+    // const description = this.addPost.value['description']
+    // const file=this.selectedFile.type['file']
+    // this.postCreateService.CreatePost({title,description,file})
+    // .subscribe(
+    //   res=>{
+    //     console.log(res)
+    //   },err=>{
+    //     console.log(err)
+    //   }
+
+    // )
     const formData = new FormData();
     formData.append("title", this.addPost.value.title);
     formData.append("description", this.addPost.value.description);

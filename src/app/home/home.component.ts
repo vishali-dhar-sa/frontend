@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PostcreateService } from './newpost/postcreate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,9 @@ import { PostcreateService } from './newpost/postcreate.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  
+  complaintDetailsById;
 allPosts:any;
-  constructor(private postService:PostcreateService) { }
+  constructor(private postService:PostcreateService,private router:Router) { }
 
   ngOnInit() {
     
@@ -23,6 +24,10 @@ allPosts:any;
       }
      )
 
+  }
+  getById(_id) {
+    this.complaintDetailsById = this.postService.getPost(_id);
+    this.router.navigate(["/postDetail/" + _id]);
   }
 
 }

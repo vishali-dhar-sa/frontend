@@ -16,7 +16,8 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { NewpostComponent } from './home/newpost/newpost.component';
 import { AuthGuard } from './auth.guard';
-import {TokenInterceptorService} from './token-interceptor.service'
+import {TokenInterceptorService} from './token-interceptor.service';
+import { PostdetailComponent } from './home/postdetail/postdetail.component'
 
 export function getAuthServiceConfigs() {
   let config = new AuthServiceConfig(
@@ -42,7 +43,8 @@ const appRoutes:Routes=[
   {path:'home',component:HomeComponent,canActivate:[AuthGuard]},
   {path:'api/signup', component:SignupComponent},
   {path:'api/login',component:LoginComponent},
-  {path:'newpost',component:NewpostComponent}
+  {path:'newpost',component:NewpostComponent},
+  {path:'postDetail/:id',component:PostdetailComponent}
 ]
 
 @NgModule({
@@ -53,6 +55,7 @@ const appRoutes:Routes=[
     HomeComponent,
     HeaderComponent,
     NewpostComponent,
+    PostdetailComponent,
     
    
     

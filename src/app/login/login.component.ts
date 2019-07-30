@@ -76,6 +76,15 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  logout(){
+    console.log("logging out of facebook");
+       this.authservice.signOut();
+       this.router.navigate(["/api/login"]);
+
+
+
+  }
+
 }
 
 
